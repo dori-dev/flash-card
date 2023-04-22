@@ -1,8 +1,14 @@
 from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
 
+from authentication import views
 
 urlpatterns = [
+    path(
+        'register/',
+        views.RegisterView.as_view(),
+        name='register',
+    ),
     path(
         'token/',
         jwt_views.TokenObtainPairView.as_view(),
