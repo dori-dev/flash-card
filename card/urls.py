@@ -9,3 +9,9 @@ urlpatterns = [
         views.CreateListFlashCardView.as_view(),
         name='create_list',
     ),
+    path(
+        '<int:pk>/',
+        views.RetrieveUpdateDeleteFlashCardView.as_view(),
+        name='detail_update_delete',
+    ),
+]
