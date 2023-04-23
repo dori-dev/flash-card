@@ -41,8 +41,7 @@ class CreateListFlashCardView(APIView):
 class RetrieveUpdateDeleteFlashCardView(APIView):
     serializer_class = FlashCardSerializer
     permission_classes = [
-        IsAuthenticatedOrReadOnly &
-        IsOwnerOrReadOnly
+        IsOwnerOrReadOnly,
     ]
 
     def dispatch(self, request, *args, **kwargs):
@@ -60,6 +59,7 @@ class RetrieveUpdateDeleteFlashCardView(APIView):
         return Response(data=serializer.data)
 
     def put(self, request, pk):
+        self.check_object_permissions(request, self.flash_card)
         serializer = self.serializer_class(
             instance=self.flash_card,
             data=request.data,
@@ -69,5 +69,6 @@ class RetrieveUpdateDeleteFlashCardView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request, pk):
+        self.check_object_permissions(request, self.flash_card)
         self.flash_card.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
