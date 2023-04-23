@@ -52,7 +52,7 @@ python manage.py runserver
 
 ## Open On Browser
 
-Development: [localhost:8080](http://localhost:8080/)<br>
+Development: [localhost:8000](http://localhost:8000/)<br>
 
 #
 
