@@ -21,6 +21,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             },
         }
 
+    def validate_username(self, value: str):
+        if value.strip() == 'admin':
+            raise serializers.ValidationError("Username can't be `admin`")
+        return value
+
     def validate_password(self, value):
         validate_password(value)
         return value
