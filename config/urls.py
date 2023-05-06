@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
     path('api/card/', include('card.urls', namespace='card')),
+    # path('api/question/', include('question.urls', namespace='question')),
 ]

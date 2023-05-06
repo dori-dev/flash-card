@@ -38,6 +38,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'card.apps.CardConfig',
     'authentication.apps.AuthenticationConfig',
+    'question.apps.QuestionConfig',
 ]
 
 INSTALLED_APPS = [
