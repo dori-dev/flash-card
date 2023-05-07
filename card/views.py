@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from card.models import FlashCard
-from card.permissions import IsOwnerOrReadOnly
+from permissions import IsOwnerOrReadOnly
 from card.serializers import FlashCardSerializer
 
 
