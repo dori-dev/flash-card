@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.urls import reverse
+import requests
 
 from authentication.serializers import RegisterSerializer
 
@@ -19,4 +21,11 @@ class RegisterView(APIView):
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.create(serializer.validated_data)
-        return Response(serializer.data, status=201)
+        response = self._get_token(request, data)
+        return Response(response, status=201)
+
+    def _get_token(self, request, data):
+        path = reverse('token_obtain_pair')
+        url = request.build_absolute_uri(path)
+        response = requests.post(url, data)
+        return response.json()
