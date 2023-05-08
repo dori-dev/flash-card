@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 THIRD_PARTY_APPS = [
     'rest_framework',
-    'drf_yasg',
+    'drf_spectacular',
 ]
 
 LOCAL_APPS = [
@@ -137,6 +137,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
@@ -150,8 +151,14 @@ REST_FRAMEWORK = {
     },
 }
 
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(weeks=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(weeks=4*12),
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Flash Card',
+    'DESCRIPTION': 'The simple flash card api.',
+    'VERSION': '2.1.1',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
