@@ -4,12 +4,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+from rest_framework.pagination import LimitOffsetPagination
 
 from question import models, serializers
 from permissions import IsOwnerOrReadOnly
 
 
-class QuestionViewSet(viewsets.ModelViewSet):
+class QuestionViewSet(viewsets.ModelViewSet, LimitOffsetPagination):
     queryset = models.Question.objects
     serializer_class = serializers.QuestionSerializer
     permission_classes = [
@@ -17,11 +18,12 @@ class QuestionViewSet(viewsets.ModelViewSet):
     ]
 
     def list(self, request):
+        questions = self.paginate_queryset(self.queryset.all())
         serializer = self.serializer_class(
-            instance=self.queryset.all(),
+            instance=questions,
             many=True,
         )
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
