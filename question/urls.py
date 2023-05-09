@@ -12,4 +12,3 @@ urlpatterns = [
 router = routers.SimpleRouter()
 router.register('', views.QuestionViewSet)
 urlpatterns += router.urls
-print(urlpatterns)
