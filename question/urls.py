@@ -6,9 +6,10 @@ from question import views
 
 app_name = 'question'
 urlpatterns = [
-    path('answer/<int:pk>/', views.AnswerAPIView.as_view()),
+    path('answer/<int:pk>/', views.AnswerAPIView.as_view(), name='answer'),
 ]
 
 router = routers.SimpleRouter()
 router.register('', views.QuestionViewSet)
 urlpatterns += router.urls
+print(urlpatterns)
